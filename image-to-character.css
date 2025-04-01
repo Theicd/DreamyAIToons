@@ -1,0 +1,61 @@
+.image-message-box {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border: 2px solid var(--primary-color);
+    border-radius: 15px;
+    text-align: center;
+    z-index: 1001;
+    box-shadow: var(--neon-shadow);
+    animation: neonPulse 2s infinite;
+    width: 80%;
+    max-width: 500px;
+}
+
+.image-message-box h3 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    text-shadow: var(--text-shadow);
+}
+
+.image-message-box p {
+    font-size: 18px;
+    line-height: 1.5;
+    text-shadow: var(--text-shadow);
+}
+
+.image-message-box img {
+    max-width: 200px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.image-message-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: white;
+    border-radius: 5px;
+}
+
+.image-message-box button {
+    padding: 12px 25px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+@media (max-width: 480px) {
+    .image-message-box { width: 85%; }
+    .image-message-box h3 { font-size: 24px; }
+    .image-message-box p { font-size: 16px; }
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חלומות מצוירים - Dreamy AI Toons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="bottom-nav.css">
+    <link rel="stylesheet" href="payment.css">
+    <link rel="stylesheet" href="image-to-character.css">
+    <link rel="stylesheet" href="welcome-screen.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="stars-background"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="top-bar">
+        <div class="logo">חלומות מצוירים</div>
+        <button class="api-btn subtle-btn" onclick="openApiModal()">הזן מפתח API</button>
+    </div>
+
+    <div class="main-container" id="main-container">
+        <h1>צור דמויות מצוירות בקלות</h1>
+        <div class="input-box" id="text-input-box">
+            <textarea placeholder="תאר את הדמות (למשל: 'נמר חביב')"></textarea>
+            <button class="generate-btn" onclick="startTextProcess()">צור דמות</button>
+        </div>
+        <div class="input-box" id="image-input-box" style="display: none;">
+            <input type="file" id="upload-image" accept="image/*" hidden>
+            <button class="upload-btn" onclick="document.getElementById('upload-image').click()">העלה תמונה</button>
+        </div>
+        <div class="payment-link">
+            <p><span class="highlight-text">אין לך מפתח API? <a href="#" onclick="openPaymentModal()">קנה מפתח ב-<strong>5 ש"ח בלבד</strong></a></span> או <a href="#" onclick="openApiModal()">הזן מפתח קיים</a></p>
+        </div>
+
+        <div class="examples" id="text-examples">
+            <div class="example-card"><img src="https://i.imgur.com/7kWwpdy.jpeg" alt="אריה"><p>אריה</p></div>
+            <div class="example-card"><img src="https://i.imgur.com/v7upiyO.jpeg" alt="גדי"><p>גדי</p></div>
+            <div class="example-card"><img src="https://i.imgur.com/A4sDD5h.jpeg" alt="נמר"><p>נמר</p></div>
+            <div class="example-card"><img src="https://i.imgur.com/PzT0DnX.jpeg" alt="עכבר"><p>עכבר</p></div>
+            <div class="example-card"><img src="https://i.imgur.com/YkYM6hZ.jpeg" alt="פיל"><p>פיל</p></div>
+        </div>
+        <div class="examples" id="image-examples" style="display: none;">
+            <div class="example-card"><img src="https://i.imgur.com/7kWwpdy.jpeg" alt="אריה"><p>אריה גיבור על</p></div>
+            <div class="example-card"><img src="https://i.imgur.com/v7upiyO.jpeg" alt="גדי"><p>גדי מונפש</p></div>
+        </div>
+    </div>
+
+    <div class="message-box" id="welcome-message">
+        <div class="welcome-header">
+            <h3><i class="fas fa-star"></i> ברוכים הבאים ל-Dreamy AI Toons! <i class="fas fa-star"></i></h3>
+        </div>
+        
+        <div class="welcome-content">
+            <div class="welcome-intro">
+                <p class="welcome-text">
+                    כלי זה מאפשר לך ליצור דמויות מצוירות בקלות ובכיף, בין אם אתה רוצה דמות חדשה לסיפור ילדים, הפתעה מיוחדת לילד, או לוגו מונפש לעסק שלך. הכל פשוט ומהיר!
+                </p>
+                <p class="welcome-text highlight-text">
+                    השתמש במפתח API של OpenAI בחינם, או קנה מפתח ב-<strong>5 ש"ח</strong> ל-12 תמונות בקנייה חד פעמית דרך ביט
+                </p>
+                <div class="divider"><span></span></div>
+            </div>
+            
+            <div class="features-container">
+                <h4>מה אפשר ליצור בכלי:</h4>
+                <ul class="features-list">
+                    <li>
+                        <div class="feature-icon"><i class="fas fa-magic"></i></div>
+                        <div class="feature-text">דמויות מצוירות מתיאור פשוט</div>
+                    </li>
+                    <li>
+                        <div class="feature-icon"><i class="fas fa-image"></i></div>
+                        <div class="feature-text">המרת תמונה של ילד או מבוגר לדמות מונפשת או גיבור על</div>
+                    </li>
+                    <li>
+                        <div class="feature-icon"><i class="fas fa-shapes"></i></div>
+                        <div class="feature-text">לוגו מונפש</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="pricing-container">
+                <div class="pricing-badge">
+                    <div class="badge-content">
+                        <span class="badge-title">הנגשה</span>
+                        <span class="badge-price">5 ₪</span>
+                    </div>
+                </div>
+                <div class="pricing-options">
+                    <p class="pricing-option"><i class="fas fa-check-circle"></i> השתמש במפתח API של OpenAI בחינם</p>
+                    <p class="pricing-option highlight"><i class="fas fa-check-circle"></i> או קנה מפתח ב-<strong>5 ₪ בלבד</strong> ל-12 תמונות </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="welcome-footer">
+            <button class="glow-button" onclick="closeMessage('welcome-message')">בוא נתחיל ליצור!</button>
+        </div>
+    </div>
+
+    <div class="message-box" id="instruction-message" style="display: none;">
+        <h3 id="instruction-title"></h3>
+        <p id="instruction-content"></p>
+        <button id="instruction-btn" onclick="nextStep()"></button>
+    </div>
+
+    <div class="image-message-box" id="image-instruction-message" style="display: none;"></div>
+
+    <div class="api-modal" id="apiModal" style="display: none;">
+        <div class="modal-header">
+            <h3>הזן מפתח API</h3>
+            <button class="close-btn" onclick="closeApiModal()">×</button>
+        </div>
+        <div class="modal-content">
+            <p>יש לך שתי אפשרויות:</p>
+            <ul>
+                <li>השתמש במפתח API אישי של OpenAI - <strong>בחינם</strong></li>
+                <li>קנה מפתח דרכנו - <strong>רק 5 ₪</strong> ל-12 תמונות</li>
+            </ul>
+            <input type="text" id="apiKey" placeholder="מפתח API של OpenAI או מפתח שנרכש">
+            <div class="modal-buttons">
+                <button onclick="saveApiKey()">שמור</button>
+                <button class="secondary-btn" onclick="openPaymentModal()">קנה מפתח</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="payment-modal" id="paymentModal" style="display: none;"></div>
+
+    <nav class="bottom-navigation">
+        <ul class="nav-list">
+            <li class="nav-item active" data-target="text">
+                <a href="#" class="nav-link"><span class="nav-icon"><i class="fas fa-magic"></i></span><span class="nav-text">צור דמויות</span></a>
+            </li>
+            <li class="nav-item" data-target="image">
+                <a href="#" class="nav-link"><span class="nav-icon"><i class="fas fa-image"></i></span><span class="nav-text">צור דמות מתמונה</span></a>
+            </li>
+            <li class="nav-item" data-target="logo">
+                <a href="#" class="nav-link"><span class="nav-icon"><i class="fas fa-shapes"></i></span><span class="nav-text">צור לוגו</span></a>
+            </li>
+            <div class="nav-indicator">צור</div>
+            <div class="nav-indicator-mask"></div>
+            <div class="curve-left"></div>
+            <div class="curve-right"></div>
+        </ul>
+    </nav>
+
+    <script src="script.js"></script>
+    <script src="bottom-nav.js"></script>
+    <script src="payment.js"></script>
+    <script src="image-to-character.js"></script>
+</body>
+</html>

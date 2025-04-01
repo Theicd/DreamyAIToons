@@ -208,13 +208,15 @@ body {
 
 .message-box button {
     padding: 12px 25px;
-    background: var(--primary-color);
-    border: none;
     border-radius: 10px;
     color: white;
     cursor: pointer;
     margin-top: 15px;
-    font-size: 16px;
+}
+
+.message-box button:not(.glow-button) {
+    background: var(--primary-color);
+    border: none;
 }
 
 .api-modal {

@@ -13,6 +13,8 @@
     animation: neonPulse 2s infinite;
     width: 350px;
     text-align: center;
+    max-height: 80vh; /* הגבלת הגובה למניעת חריגה מהמסך */
+    overflow-y: auto; /* אפשור גלילה אנכית */
 }
 
 .payment-modal h3 {
@@ -418,7 +420,11 @@
 @media (max-width: 480px) {
     .payment-modal {
         width: 95%;
-        max-height: 90vh;
+        max-height: 85vh; /* u05d4u05d2u05d3u05dcu05ea u05d4u05d2u05d5u05d1u05d4 u05d4u05deu05e7u05e1u05d9u05deu05dcu05d9 u05d1u05deu05d5u05d1u05d9u05d9u05dc */
+        overflow-y: auto; /* u05d5u05d9u05d3u05d5u05d0 u05e9u05d0u05e4u05e8 u05dcu05d2u05dcu05d5u05dc u05d1u05deu05d5u05d1u05d9u05d9u05dc */
+        top: 50%;
+        transform: translate(-50%, -50%); /* u05e9u05deu05d9u05e8u05d4 u05e2u05dc u05deu05d9u05e7u05d5u05dd u05d0u05deu05e6u05e2 u05d2u05dd u05d1u05deu05d5u05d1u05d9u05d9u05dc */
+        -webkit-overflow-scrolling: touch; /* u05e9u05d9u05e4u05d5u05e8 u05d4u05d2u05dcu05d9u05dcu05d4 u05d1-iOS */
     }
     
     .progress-line {

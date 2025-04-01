@@ -94,7 +94,7 @@ function updatePaymentModal() {
                     </p>
                 </div>
                 
-                <button class="wide-btn" onclick="nextPaymentStep()">המשך לפרטי התקשרות</button>
+                <button class="primary-btn wide-btn" onclick="nextPaymentStep()">המשך לפרטי התקשרות</button>
             </div>
         `;
     } else if (paymentStep === 2) { // שלב מילוי פרטים

@@ -166,7 +166,7 @@ body {
 
 .message-box {
     position: fixed;
-    top: 20%;
+    top: 5%; /* u05deu05d5u05e8u05d9u05d3u05d9u05dd u05de-20% u05dc-5% u05dbu05d3u05d9 u05e9u05d4u05d4u05d5u05d3u05e2u05d4 u05eau05d4u05d9u05d4 u05d2u05d1u05d5u05d4u05d4 u05d9u05d5u05eau05e8 */
     left: 50%;
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.7);
@@ -189,7 +189,7 @@ body {
 }
 
 #welcome-message {
-    top: 10%;
+    top: 0%; /* u05deu05e9u05e0u05d4 u05de-10% u05dc-0% u05dbu05d3u05d9 u05e9u05d4u05d4u05d5u05d3u05e2u05d4 u05eau05d4u05d9u05d4 u05d1u05d7u05dcu05e7 u05d4u05e2u05dcu05d9u05d5u05df u05d1u05d9u05d5u05eau05e8 u05e9u05dc u05d4u05deu05e1u05da */
     background: rgba(0, 0, 0, 0.85);
     border: 2px solid rgba(72, 136, 255, 0.8);
 }

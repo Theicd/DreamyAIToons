@@ -49,6 +49,14 @@
         </div>
     </div>
 
+    <div class="message-box" id="instruction-message" style="display: none;">
+        <h3 id="instruction-title"></h3>
+        <p id="instruction-content"></p>
+        <button id="instruction-btn" onclick="nextStep()"></button>
+    </div>
+
+    <div class="image-message-box" id="image-instruction-message" style="display: none;"></div>
+
     <div class="message-box" id="welcome-message">
         <div class="welcome-header">
             <h3><i class="fas fa-star"></i> ברוכים הבאים ל-Dreamy AI Toons! <i class="fas fa-star"></i></h3>
@@ -102,14 +110,6 @@
         </div>
     </div>
 
-    <div class="message-box" id="instruction-message" style="display: none;">
-        <h3 id="instruction-title"></h3>
-        <p id="instruction-content"></p>
-        <button id="instruction-btn" onclick="nextStep()"></button>
-    </div>
-
-    <div class="image-message-box" id="image-instruction-message" style="display: none;"></div>
-
     <div class="api-modal" id="apiModal" style="display: none;">
         <div class="modal-header">
             <h3>הזן מפתח API</h3>
@@ -153,5 +153,6 @@
     <script src="bottom-nav.js"></script>
     <script src="payment.js"></script>
     <script src="image-to-character.js"></script>
+    <script src="text-to-character.js"></script>
 </body>
 </html>

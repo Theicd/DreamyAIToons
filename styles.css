@@ -230,30 +230,124 @@ body {
     border: 2px solid var(--primary-color);
     border-radius: 15px;
     z-index: 1001;
-    box-shadow: var(--neon-shadow);
-    animation: neonPulse 2s infinite;
+    box-shadow: 0 0 25px rgba(102, 0, 255, 0.6), 0 0 40px rgba(0, 136, 255, 0.3); /* עדכון אפקט הזוהר */
     width: 300px;
     font-family: 'Heebo', sans-serif;
+    max-height: 85vh; /* הגבלת גובה בסיסית */
+    overflow-y: auto; /* אפשרות גלילה אם צריך */
 }
 
 .api-modal input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
-    background: transparent;
+    margin-bottom: 15px;
+    background: rgba(0, 0, 0, 0.6);
     border: 1px solid var(--primary-color);
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: all 0.3s;
 }
 
-.api-modal button {
+.api-modal input:focus {
+    border-color: #6600ff;
+    box-shadow: 0 0 10px rgba(102, 0, 255, 0.5);
+    outline: none;
+}
+
+.api-modal button:not(.close-btn):not(.secondary-btn) {
     width: 100%;
-    padding: 10px;
-    background: var(--primary-color);
+    padding: 12px;
+    background: linear-gradient(45deg, #0088ff, #6600ff); /* גרדיאנט כחול-סגול */
     border: none;
-    border-radius: 5px;
+    border-radius: 50px; /* יותר מעוגל */
     color: white;
     cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(102, 0, 255, 0.5), 0 0 40px rgba(0, 136, 255, 0.2);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.api-modal button:not(.close-btn):not(.secondary-btn)::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 60%);
+    opacity: 0;
+    transform: scale(0.5);
+    animation: ripple 3s infinite;
+    pointer-events: none;
+}
+
+.api-modal button:not(.close-btn):not(.secondary-btn):hover {
+    background: linear-gradient(45deg, #6600ff, #0088ff); /* גרדיאנט הפוך ב-hover */
+    transform: translateY(-3px); /* תזוזה מעלה ב-hover */
+    box-shadow: 0 0 30px rgba(102, 0, 255, 0.7), 0 0 50px rgba(0, 136, 255, 0.3);
+}
+
+.api-modal button:not(.close-btn):not(.secondary-btn):active {
+    transform: translateY(1px);
+    box-shadow: 0 0 15px rgba(102, 0, 255, 0.6);
+}
+
+.api-modal .secondary-btn {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(0, 136, 255, 0.5);
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 136, 255, 0.2);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.api-modal .secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+}
+
+.api-modal .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px !important;
+    height: 30px !important;
+    background: linear-gradient(45deg, #0088ff, #6600ff);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    padding: 0 !important;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(102, 0, 255, 0.5);
+}
+
+.api-modal .close-btn:hover {
+    background: linear-gradient(45deg, #6600ff, #0088ff);
+    transform: rotate(90deg) scale(1.1);
+    color: white;
+    box-shadow: 0 0 15px rgba(102, 0, 255, 0.7);
+}
+
+/* התאמה למובייל */
+@media (max-width: 480px) {
+    .api-modal {
+        width: 95%;
+        max-height: 85vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .examples {

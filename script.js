@@ -91,84 +91,25 @@ function closeApiModal() {
 function saveApiKey() {
     apiKey = document.getElementById('apiKey').value;
     const modal = document.getElementById('apiModal');
-    gsap.to(modal, { scale: 0.8, opacity: 0, duration: 0.3, onComplete: () => modal.style.display = 'none' });
-    if (apiKey.startsWith('mock-api-key-')) {
-        credits = 12; // מפתח שנרכש
-    } else {
-        credits = Infinity; // מפתח של OpenAI
-    }
-    alert('מפתח API נשמר בהצלחה!');
-}
-
-function startTextProcess() {
-    if (!apiKey) {
-        showMessage('instruction-message', 'צריך מפתח API', 'הזן מפתח API של OpenAI או קנה מפתח ב-5 ש"ח ל-12 תמונות.', 'הבנתי');
-        return;
-    }
-    if (credits === 0) {
-        showMessage('instruction-message', 'נגמרו הקרדיטים', 'קנה מפתח חדש ב-5 ש"ח כדי להמשיך.', 'הבנתי');
-        return;
-    }
-    currentState = 1;
-    updateTextState();
-}
-
-function nextStep() {
-    currentState++;
-    updateTextState();
-}
-
-function updateTextState() {
-    const states = [
-        () => closeMessage('instruction-message'),
-        () => {
-            const description = document.querySelector('textarea').value;
-            if (description) {
-                generateFromText(description);
-            } else {
-                showMessage('instruction-message', 'שגיאה', 'כתוב תיאור לדמות תחילה.', 'חזור');
-            }
-        },
-        () => showMessage('instruction-message', 'הדמות מוכנה!', `נותרו לך ${credits} תמונות. התחל שוב או סגור.`, 'התחל שוב')
-    ];
-
-    if (states[currentState]) states[currentState]();
-    if (currentState >= states.length - 1) currentState = 0;
-}
-
-async function generateFromText(description) {
-    const prompt = `${description}, a cartoon character in an animated style with consistent color texture, white background`;
-    try {
-        const response = await fetch('https://api.openai.com/v1/images/generations', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-                prompt: prompt,
-                n: 1,
-                size: '512x512'
-            })
-        });
-
-        const data = await response.json();
-        if (data.data && data.data[0].url) {
-            const img = document.createElement('img');
-            img.src = data.data[0].url;
-            img.style.borderRadius = '10px';
-            img.style.maxWidth = '300px';
-            document.querySelector('#text-examples').prepend(img);
-            credits--;
-            currentState++;
-            updateTextState();
+    
+    // נסגור את המודל של הזנת המפתח
+    gsap.to(modal, { scale: 0.8, opacity: 0, duration: 0.3, onComplete: () => {
+        modal.style.display = 'none';
+        
+        // אחרי שהמודל נסגר, נציג הודעת אישור בממשק
+        if (apiKey.startsWith('mock-api-key-')) {
+            credits = 12; // מפתח שנרכש
         } else {
-            alert('שגיאה ביצירת הדמות. בדוק את מפתח ה-API.');
+            credits = Infinity; // מפתח של OpenAI
         }
-    } catch (error) {
-        alert('שגיאה: ' + error.message);
-    }
+        
+        // הצגת הודעת אישור בממשק במקום ב-alert
+        showMessage('instruction-message', 'אישור', 'מפתח API נשמר בהצלחה!', 'סגור');
+        document.getElementById('instruction-btn').onclick = function() { closeMessage('instruction-message'); };
+    }});
 }
+
+// פונקציות יצירת דמות מטקסט הועברו לקובץ text-to-character.js
 
 window.addEventListener('load', () => {
     showMessage('welcome-message', 'ברוכים הבאים ל-Dreamy AI Toons!', 'כלי זה מאפשר לך ליצור דמויות מצוירות בקלות ובכיף, בין אם אתה רוצה דמות חדשה לסיפור ילדים, הפתעה מיוחדת לילד, או לוגו מונפש לעסק שלך. הכל פשוט ומהיר!\n\n', 'בוא נתחיל ליצור!');

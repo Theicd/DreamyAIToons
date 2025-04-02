@@ -1,6 +1,23 @@
 let paymentStep = 1;
 
 function openPaymentModal() {
+    // קודם נסגור את חלון ה-API אם הוא פתוח
+    const apiModal = document.getElementById('apiModal');
+    if (apiModal.style.display === 'block') {
+        gsap.to(apiModal, { scale: 0.8, opacity: 0, duration: 0.3, onComplete: () => {
+            apiModal.style.display = 'none';
+            
+            // אחרי שנסגור את חלון ה-API, נפעיל את חלון התשלום
+            initiatePaymentModal();
+        }});
+    } else {
+        // אם חלון ה-API אינו פתוח, נפעיל ישירות את חלון התשלום
+        initiatePaymentModal();
+    }
+}
+
+// פונקציה חדשה שתפעיל את חלון התשלום
+function initiatePaymentModal() {
     paymentStep = 1;
     updatePaymentModal();
 }

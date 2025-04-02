@@ -66,7 +66,7 @@ animateParticles();
 function showMessage(id, title, content, btnText) {
     const message = document.getElementById(id);
     message.querySelector('h3').textContent = title;
-    message.querySelector('p').textContent = content;
+    message.querySelector('p').innerHTML = content;
     message.querySelector('button').textContent = btnText;
     message.style.display = 'block';
     gsap.fromTo(message, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3 });

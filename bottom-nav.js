@@ -104,11 +104,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const mainHeader = document.querySelector('.main-container h1');
         if (mainHeader) {
             if (target === 'text') {
-                mainHeader.textContent = 'צור דמויות מצוירות בקלות';
+                mainHeader.textContent = 'צרו דמויות מצוירות בקלות';
             } else if (target === 'image') {
-                mainHeader.textContent = 'הפוך תמונות לדמויות מצוירות';
+                mainHeader.textContent = 'הפכו תמונות לדמויות מצוירות';
             } else if (target === 'logo') {
-                mainHeader.textContent = 'צור לוגואים תלת-מימדיים';
+                mainHeader.textContent = 'צרו לוגואים תלת-מימדיים';
             }
         }
 

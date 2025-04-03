@@ -124,15 +124,20 @@ Subtle depth of field, symmetrical framing, one face, two eyes, consistent propo
         
         const data = await response.json();
         if (data.data && data.data[0].url) {
-            // העלאת התמונה ל-ImageKit לשמירה קבועה
-            const permanentUrl = await uploadToImageKit(data.data[0].url, description);
+            // שמירת הקישור המקורי - מוותרים על העלאה ל-ImageKit בגלל בעיית CORS
+            const imageUrl = data.data[0].url;
+            saveImageToLocalStorage(imageUrl, description);
             
-            // יצירת תמונה עם הלינק הקבוע
+            // יצירת תמונה עם הלינק המקורי
             const img = document.createElement('img');
-            img.src = permanentUrl;
-            img.style.borderRadius = '10px';
-            img.style.maxWidth = '300px';
+            img.src = imageUrl;
             
+            // עדכון הסגנון כדי שהתמונה תתאים למסגרת
+            img.style.borderRadius = '8px';
+            img.style.width = '92%';
+            img.style.height = '75%';   // הגדלת הגובה
+            img.style.objectFit = 'cover';
+            img.style.margin = '3% 4% 12% 4%';  // הגדלת המרווח התחתון והעליון
             // הוספת מסגרת כמו בשאר התמונות באתר
             const container = document.createElement('div');
             container.className = 'example-card';
@@ -204,6 +209,22 @@ function resetProcessingMessage() {
     }
 }
 
+// שמירת הלינק והתיאור ב-localStorage
+function saveImageToLocalStorage(imageUrl, description) {
+    // קבלת הרשימה הקיימת מ-localStorage
+    let savedImages = JSON.parse(localStorage.getItem('savedCharacterImages') || '[]');
+    
+    // הוספת התמונה החדשה לרשימה
+    savedImages.push({
+        url: imageUrl,
+        description: description,
+        createdAt: Date.now() // זמן היצירה במילישניות
+    });
+    
+    // שמירת הרשימה המעודכנת ב-localStorage
+    localStorage.setItem('savedCharacterImages', JSON.stringify(savedImages));
+}
+
 // פונקציה להעלאת תמונה ל-ImageKit
 async function uploadToImageKit(imageUrl, description) {
     try {
@@ -240,39 +261,41 @@ async function uploadToImageKit(imageUrl, description) {
     }
 }
 
-// שמירת הלינק והתיאור ב-localStorage
-function saveImageToLocalStorage(imageUrl, description) {
-    // קבלת הרשימה הקיימת מ-localStorage
-    let savedImages = JSON.parse(localStorage.getItem('savedCharacterImages') || '[]');
-    
-    // הוספת התמונה החדשה לרשימה
-    savedImages.push({
-        url: imageUrl,
-        description: description,
-        date: new Date().toISOString()
-    });
-    
-    // שמירת הרשימה המעודכנת ב-localStorage
-    localStorage.setItem('savedCharacterImages', JSON.stringify(savedImages));
-}
-
 // טעינת התמונות השמורות בעת טעינת הדף
 function loadSavedImages() {
+    // קבלת הרשימה הקיימת מ-localStorage
     const savedImages = JSON.parse(localStorage.getItem('savedCharacterImages') || '[]');
     
-    // הצגת התמונות השמורות
-    savedImages.forEach(image => {
+    // הגדרת זמן שעה אחת במילישניות
+    const oneHourMs = 60 * 60 * 1000;
+    const now = Date.now();
+    
+    // סינון התמונות שנוצרו בשעה האחרונה
+    const validImages = savedImages.filter(image => {
+        // בדיקה אם יש תאריך יצירה ואם הוא בתוך השעה האחרונה
+        return image.createdAt && ((now - image.createdAt) < oneHourMs);
+    });
+    
+    // עדכון הרשימה ב-localStorage
+    localStorage.setItem('savedCharacterImages', JSON.stringify(validImages));
+    
+    // הצגת התמונות המסוננות
+    validImages.forEach(image => {
         const img = document.createElement('img');
         img.src = image.url;
-        img.style.borderRadius = '10px';
-        img.style.maxWidth = '300px';
         
+        // עדכון הסגנון כדי שהתמונה תתאים למסגרת
+        img.style.borderRadius = '8px';
+        img.style.width = '92%';
+        img.style.height = '75%';   // הגדלת הגובה
+        img.style.objectFit = 'cover';
+        img.style.margin = '3% 4% 12% 4%';  // הגדלת המרווח התחתון והעליון
         // הוספת מסגרת כמו בשאר התמונות באתר
         const container = document.createElement('div');
         container.className = 'example-card';
         container.appendChild(img);
         
-        // הוספת תיאור אם יש
+        // הוספת תיאור הדמות
         if (image.description) {
             const p = document.createElement('p');
             p.textContent = image.description;

